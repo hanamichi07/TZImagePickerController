@@ -496,12 +496,23 @@ static CGFloat itemMargin = 5;
     if (((tzImagePickerVc.sortAscendingByModificationDate && indexPath.row >= _models.count) || (!tzImagePickerVc.sortAscendingByModificationDate && indexPath.row == 0)) && _showTakePhotoBtn)  {
         [self takePhoto]; return;
     }
+    
     // preview phote or video / 预览照片或视频
     NSInteger index = indexPath.row;
     if (!tzImagePickerVc.sortAscendingByModificationDate && _showTakePhotoBtn) {
         index = indexPath.row - 1;
     }
     TZAssetModel *model = _models[index];
+    
+    // 禁止预览
+    if (!tzImagePickerVc.allowPreview) {
+        TZAssetModel *model = _models[index];
+        tzImagePickerVc.selectedModels = @[model];
+        [self doneButtonClick];
+        return;
+    }
+    
+    
     if (model.type == TZAssetModelMediaTypeVideo && !tzImagePickerVc.allowPickingMultipleVideo) {
         if (tzImagePickerVc.selectedModels.count > 0) {
             TZImagePickerController *imagePickerVc = (TZImagePickerController *)self.navigationController;

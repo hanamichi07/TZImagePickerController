@@ -289,7 +289,7 @@
     }];
     imagePickerVc.delegate = self;
     */
-    
+    imagePickerVc.allowPreview = false;
     imagePickerVc.isStatusBarDefault = NO;
 #pragma mark - 到这里为止
     
