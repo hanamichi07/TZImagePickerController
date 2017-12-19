@@ -505,13 +505,13 @@ static CGFloat itemMargin = 5;
     TZAssetModel *model = _models[index];
     
     // 禁止预览
-    if (!tzImagePickerVc.allowPreview) {
-        TZAssetModel *model = _models[index];
-        tzImagePickerVc.selectedModels = @[model];
-        [self doneButtonClick];
+    if (tzImagePickerVc.maxImagesCount == 1) {
+        TZPhotoPreviewController *photoPreviewVc = [[TZPhotoPreviewController alloc] init];
+        photoPreviewVc.currentIndex = 0;
+        photoPreviewVc.models = @[model];
+        [self pushPhotoPrevireViewController:photoPreviewVc];
         return;
     }
-    
     
     if (model.type == TZAssetModelMediaTypeVideo && !tzImagePickerVc.allowPickingMultipleVideo) {
         if (tzImagePickerVc.selectedModels.count > 0) {
