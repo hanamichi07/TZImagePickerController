@@ -191,7 +191,7 @@
         _cropBgView.frame = self.view.bounds;
         _cropBgView.backgroundColor = [UIColor clearColor];
         [self.view addSubview:_cropBgView];
-        [TZImageCropManager overlayClippingWithView:_cropBgView cropRect:_tzImagePickerVc.cropRect containerView:self.view needCircleCrop:_tzImagePickerVc.needCircleCrop];
+        [TZImageCropManager overlayClippingWithView:_cropBgView cropRect:_tzImagePickerVc.cropRect containerView:self.view needCircleCrop:_tzImagePickerVc.circleCropRadius > 0];
         
         _cropView = [UIView new];
         _cropView.userInteractionEnabled = NO;
@@ -199,7 +199,7 @@
         _cropView.backgroundColor = [UIColor clearColor];
         _cropView.layer.borderColor = [UIColor whiteColor].CGColor;
         _cropView.layer.borderWidth = 1.0;
-        if (_tzImagePickerVc.needCircleCrop) {
+        if (_tzImagePickerVc.circleCropRadius > 0) {
             _cropView.layer.cornerRadius = _tzImagePickerVc.cropRect.size.width / 2;
             _cropView.clipsToBounds = YES;
         }
